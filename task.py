@@ -1,4 +1,3 @@
-#
 #Flight simulator. 
 #Write a code in python that simulates the tilt correction of the plane (angle between plane wings and earth). 
 #The program should print out current orientation, and applied tilt correction.
@@ -9,16 +8,31 @@
 #With every simulation step the orentation should be corrected, correction should be applied and printed out.
 #Try to expand your implementation as best as you can. 
 #Think of as many features as you can, and try implementing them.
-#
-#Try to expand your implementation as best as you can. 
-#Think of as many features as you can, and try implementing them.
-#Make intelligent use of pythons syntactic sugar (overloading, iterators, generators, etc)
-#Most of all: CREATE GOOD, RELIABLE, READABLE CODE.
-#The goal of this task is for you to SHOW YOUR BEST python programming skills.
-#Impress everyone with your skills, show off with your code.
-#
-#Your program must be runnable with command "python task.py".
-#Show some usecases of your library in the code (print some things)
-#Delete these comments before commit!
-#
-#Good luck.
+
+import random
+
+def current_orientation():
+    return random.randrange(0,360)
+
+def new_orientation(current_orientation, rate_of_correction):
+    return current_orientation+random.gauss(0, 2*rate_of_correction)
+
+def tilt_correction(current_orientation, rate_of_correction):
+    return ((current_orientation+random.randrange(0,360))/4)%360
+
+if __name__=="__main__":
+    orientation=current_orientation()
+    rate_of_correction=random.random()
+
+    while(True):
+        print("write 'stop'- to end the loop, anything else to continue")
+        x = input()
+        if(x=="stop"):
+            break
+
+        current=new_orientation(orientation, rate_of_correction)
+        print("current orientation: {}".format(current))
+
+        correction=tilt_correction(current, rate_of_correction)
+
+        print("with correction {corr}: {final}".format(final=(current+correction)%360, corr=correction))
